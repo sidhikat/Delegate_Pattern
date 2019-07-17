@@ -21,16 +21,21 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     }
     
     // DELEGATE METHOD : Review each character typed to decide to keep it (true) or not (false)
-    // TODO: Modify code to reject (return false) if it finds any letters in the replacement string
-    //  (hint-use Documentation to find a NSCharacterSet collection for letters, and a String method that finds a range using a NSCharacterSet)
+    // Modify code to reject (return false) if it finds any letters in the replacement string
+    // (hint-use Documentation to find a NSCharacterSet collection for letters, and a String method that finds a range using a NSCharacterSet)
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let existingTextHasDecimalSeparator = textField.text?.range(of: ".")
         let replacementTextHasDecimalSeparator = string.range(of: ".")
+        //checks if textlabel has a letter in it
+        let replacementTexthasLetters = string.rangeOfCharacter(from: NSCharacterSet.letters)
         
         if existingTextHasDecimalSeparator != nil && replacementTextHasDecimalSeparator != nil {
             return false
-        } else {
+            //returns false if string has letters
+        } else if replacementTexthasLetters != nil{
+            return false
+        }else {
             return true
         }
     }
